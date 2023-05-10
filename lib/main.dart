@@ -11,7 +11,9 @@ void main() {
           actions: [
             IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () {},
+              onPressed: () {
+                //TODO add settings
+              },
             ),
           ],
         ),
