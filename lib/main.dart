@@ -66,27 +66,27 @@ class _MyAppState extends State<MyApp> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    RadioListTile<int>(
+                    RadioListTile<ColorMode>(
                       title: const Text('Party mode'),
-                      value: ColorMode.partyMode.index,
+                      value: ColorMode.partyMode,
                       groupValue: _colorGroup,
-                      onChanged: (int? value) {
+                      onChanged: (ColorMode? value) {
                         setState(() => _colorGroup = value);
                       },
                     ),
-                    RadioListTile<int>(
+                    RadioListTile<ColorMode>(
                       title: const Text('Warm mode'),
-                      value: ColorMode.warmMode.index,
+                      value: ColorMode.warmMode,
                       groupValue: _colorGroup,
-                      onChanged: (int? value) {
+                      onChanged: (ColorMode? value) {
                         setState(() => _colorGroup = value!);
                       },
                     ),
-                    RadioListTile<int>(
+                    RadioListTile<ColorMode>(
                       title: const Text('Cold mode'),
-                      value: ColorMode.coldMode.index,
+                      value: ColorMode.coldMode,
                       groupValue: _colorGroup,
-                      onChanged: (int? value) {
+                      onChanged: (ColorMode? value) {
                         setState(() => _colorGroup = value!);
                       },
                     ),
