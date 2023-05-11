@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   ColorMode? _colorGroup = ColorMode.partyMode;
   Color _backgroundColor = Colors.red;
 
-  void _changeColor() {
+  void _useRandomPartyColors() {
     setState(
       () {
         _backgroundColor = Color.fromRGBO(
@@ -38,15 +38,46 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  void _showDialog() {
+  void _useRandomWarmColors() {
+    setState(() {
+      _backgroundColor = Color.fromRGBO(
+        Random().nextInt(256),
+        Random().nextInt(128),
+        Random().nextInt(64),
+        1,
+      );
+    });
+  }
+
+  void _useRandomColdColors() {
+    setState(() {
+      _backgroundColor = Color.fromRGBO(
+        Random().nextInt(64),
+        Random().nextInt(128),
+        Random().nextInt(256),
+        1,
+      );
+    });
+  }
+
+  void _changeColorBackground() {
+    if (_colorGroup == ColorMode.partyMode) {
+      _useRandomPartyColors();
+    } else if (_colorGroup == ColorMode.warmMode) {
+      _useRandomWarmColors();
+    } else {
+      _useRandomColdColors();
+    }
+  }
+
+  void _showSettingsDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            int radioColorValue = 0;
-            bool _switchValue1 = false;
-            bool _switchValue2 = false;
+            bool soundSwitch = false;
+            bool darkModeSwitch = false;
 
             return AlertDialog(
               title: const Text(
@@ -90,7 +121,9 @@ class _MyAppState extends State<MyApp> {
                         setState(() => _colorGroup = value!);
                       },
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
+                    const Divider(height: 1),
+                    const SizedBox(height: 10),
                     const Text(
                       'Enable options',
                       style: TextStyle(
@@ -100,13 +133,29 @@ class _MyAppState extends State<MyApp> {
                     ),
                     SwitchListTile(
                       title: const Text('Sound'),
-                      value: false,
-                      onChanged: (bool value) {},
+                      secondary: const Icon(
+                        Icons.volume_up,
+                      ),
+                      value: soundSwitch,
+                      onChanged: (bool value) {
+                        setState(() {
+                          soundSwitch = value;
+                        });
+                      },
                     ),
                     SwitchListTile(
-                      title: const Text('Dark mode'),
-                      value: false,
-                      onChanged: (bool value) {},
+                      title: const Text(
+                        'Dark mode',
+                      ),
+                      secondary: const Icon(
+                        Icons.dark_mode,
+                      ),
+                      value: darkModeSwitch,
+                      onChanged: (bool value) {
+                        setState(() {
+                          darkModeSwitch = value;
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -121,7 +170,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _changeColor,
+      onTap: _changeColorBackground,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Test task"),
@@ -129,7 +178,7 @@ class _MyAppState extends State<MyApp> {
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
-                _showDialog();
+                _showSettingsDialog();
               },
             ),
           ],
