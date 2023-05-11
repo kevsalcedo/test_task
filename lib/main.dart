@@ -19,7 +19,10 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+enum ColorMode { partyMode, warmMode, coldMode }
+
 class _MyAppState extends State<MyApp> {
+  ColorMode? _colorGroup = ColorMode.partyMode;
   Color _backgroundColor = Colors.red;
 
   void _changeColor() {
@@ -41,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            int _radioValue = 0;
+            int radioColorValue = 0;
             bool _switchValue1 = false;
             bool _switchValue2 = false;
 
@@ -65,26 +68,26 @@ class _MyAppState extends State<MyApp> {
                     ),
                     RadioListTile<int>(
                       title: const Text('Party mode'),
-                      value: 0,
-                      groupValue: _radioValue,
+                      value: ColorMode.partyMode.index,
+                      groupValue: _colorGroup,
                       onChanged: (int? value) {
-                        setState(() => _radioValue = value!);
+                        setState(() => _colorGroup = value);
                       },
                     ),
                     RadioListTile<int>(
-                      title: const Text('Warm colors'),
-                      value: 1,
-                      groupValue: _radioValue,
+                      title: const Text('Warm mode'),
+                      value: ColorMode.warmMode.index,
+                      groupValue: _colorGroup,
                       onChanged: (int? value) {
-                        setState(() => _radioValue = value!);
+                        setState(() => _colorGroup = value!);
                       },
                     ),
                     RadioListTile<int>(
-                      title: const Text('Cold colors'),
-                      value: 2,
-                      groupValue: _radioValue,
+                      title: const Text('Cold mode'),
+                      value: ColorMode.coldMode.index,
+                      groupValue: _colorGroup,
                       onChanged: (int? value) {
-                        setState(() => _radioValue = value!);
+                        setState(() => _colorGroup = value!);
                       },
                     ),
                     const SizedBox(height: 20),
