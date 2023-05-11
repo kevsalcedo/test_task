@@ -6,17 +6,6 @@ void main() {
   runApp(
     MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Test task"),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                //TODO add settings
-              },
-            ),
-          ],
-        ),
         body: MyApp(),
       ),
     ),
