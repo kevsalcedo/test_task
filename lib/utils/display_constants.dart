@@ -14,3 +14,6 @@ const String kNote1 = 'note1.wav';
 const int kSoundDuration = 1200;
 const double kLetterSpacing = 1.5;
 const double kFrontTextSize = 30.0;
+const kPartyModeColors = [256, 256, 256];
+const kWarmModeColors = [256, 128, 64];
+const kCoolModeColors = [64, 128, 256];

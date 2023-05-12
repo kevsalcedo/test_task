@@ -14,6 +14,7 @@ void main() {
   );
 }
 
+///
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,9 +22,17 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+/// Represents the different color modes available in the application.
+/// Each color mode defines a range of colors that will be used for generate
+/// random colors for the background.
 enum ColorMode {
+  /// Party mode uses a full range of colors.
   partyMode,
+
+  /// The warm mode uses mainly warm colors such as reds and yellows.
   warmMode,
+
+  ///The cool mode uses mainly cool colors such as blues and greens.
   coldMode,
 }
 
@@ -75,8 +84,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /// Displays a dialog that allows user to select a color group for background colors and toggle
-  /// sound and dark mode
+  /// Displays a dialog that allows user to select a color group for background
+  /// colors and toggle sound and dark mode
   void _showSettingsDialog() {
     showDialog(
       context: context,
@@ -111,7 +120,7 @@ class _MyAppState extends State<MyApp> {
                       value: ColorMode.warmMode,
                       groupValue: _colorGroup,
                       onChanged: (ColorMode? value) {
-                        setState(() => _colorGroup = value!);
+                        setState(() => _colorGroup = value);
                       },
                     ),
                     RadioListTile<ColorMode>(
@@ -119,7 +128,7 @@ class _MyAppState extends State<MyApp> {
                       value: ColorMode.coldMode,
                       groupValue: _colorGroup,
                       onChanged: (ColorMode? value) {
-                        setState(() => _colorGroup = value!);
+                        setState(() => _colorGroup = value);
                       },
                     ),
                     //const SizedBox(height: 10),
@@ -180,11 +189,23 @@ class _MyAppState extends State<MyApp> {
   /// Defines the parameters for the color range depending on the selected _colorGroup.
   void _changeColorBackground() {
     if (_colorGroup == ColorMode.partyMode) {
-      _useRandomColors(256, 256, 256);
+      _useRandomColors(
+        kPartyModeColors.first,
+        kPartyModeColors[1],
+        kPartyModeColors[2],
+      );
     } else if (_colorGroup == ColorMode.warmMode) {
-      _useRandomColors(256, 128, 64);
+      _useRandomColors(
+        kWarmModeColors.first,
+        kWarmModeColors[1],
+        kWarmModeColors[2],
+      );
     } else {
-      _useRandomColors(64, 128, 256);
+      _useRandomColors(
+        kCoolModeColors.first,
+        kCoolModeColors[1],
+        kCoolModeColors[2],
+      );
     }
   }
 
