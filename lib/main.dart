@@ -207,19 +207,12 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  /// Play sound if soundSwitch is true
   void _checkSoundMode() {
     if (soundSwitch == true) {
       player.setSource(AssetSource('note1.wav'));
+      player.resume();
+      player.seek(const Duration(milliseconds: 1200));
     }
-  }
-
-  Widget _buildTitle(String title) {
-    return Text(
-      title,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ),
-    );
   }
 }
