@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   Color _backgroundColor = Colors.red;
   final player = AudioPlayer();
   bool soundSwitch = false;
-  bool darkModeSwitch = false;
+  bool isDarkMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +39,33 @@ class _MyAppState extends State<MyApp> {
         _changeColorBackground();
         _checkSoundMode();
       },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Test task"),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                _showSettingsDialog();
-              },
-            ),
-          ],
+      child: MaterialApp(
+        title: 'Test task',
+        theme: ThemeData(
+          brightness: isDarkMode ? Brightness.dark : Brightness.light,
+          colorScheme:
+              isDarkMode ? const ColorScheme.dark() : const ColorScheme.light(),
         ),
-        backgroundColor: _backgroundColor,
-        body: const Center(
-          child: Text(
-            "Hey there",
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("Test task"),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.settings),
+                onPressed: () {
+                  _showSettingsDialog();
+                },
+              ),
+            ],
+          ),
+          backgroundColor: _backgroundColor,
+          body: const Center(
+            child: Text(
+              "Hey there",
+              style: TextStyle(
+                fontSize: 30,
+                //color: Colors.white,
+              ),
             ),
           ),
         ),
@@ -143,10 +151,10 @@ class _MyAppState extends State<MyApp> {
                       secondary: const Icon(
                         Icons.dark_mode,
                       ),
-                      value: darkModeSwitch,
+                      value: isDarkMode,
                       onChanged: (bool value) {
                         setState(() {
-                          darkModeSwitch = value;
+                          isDarkMode = value;
                         });
                       },
                     ),
