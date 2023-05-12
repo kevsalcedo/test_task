@@ -1,10 +1,10 @@
 import 'dart:math';
-
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       home: Scaffold(
         body: MyApp(),
       ),
@@ -19,11 +19,18 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-enum ColorMode { partyMode, warmMode, coldMode }
+enum ColorMode {
+  partyMode,
+  warmMode,
+  coldMode,
+}
 
 class _MyAppState extends State<MyApp> {
   ColorMode? _colorGroup = ColorMode.partyMode;
   Color _backgroundColor = Colors.red;
+  final player = AudioPlayer();
+  bool soundSwitch = false;
+  bool darkModeSwitch = false;
 
   void _useRandomPartyColors() {
     setState(
