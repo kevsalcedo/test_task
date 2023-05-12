@@ -32,60 +32,46 @@ class _MyAppState extends State<MyApp> {
   bool soundSwitch = false;
   bool darkModeSwitch = false;
 
-  void _useRandomPartyColors() {
-    setState(
-      () {
-        _backgroundColor = Color.fromRGBO(
-          Random().nextInt(256),
-          Random().nextInt(256),
-          Random().nextInt(256),
-          1,
-        );
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        _changeColorBackground();
+        _checkSoundMode();
       },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Test task"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                _showSettingsDialog();
+              },
+            ),
+          ],
+        ),
+        backgroundColor: _backgroundColor,
+        body: const Center(
+          child: Text(
+            "Hey there",
+            style: TextStyle(
+              fontSize: 30,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 
-  void _useRandomWarmColors() {
-    setState(() {
-      _backgroundColor = Color.fromRGBO(
-        Random().nextInt(256),
-        Random().nextInt(128),
-        Random().nextInt(64),
-        1,
-      );
-    });
-  }
-
-  void _useRandomColdColors() {
-    setState(() {
-      _backgroundColor = Color.fromRGBO(
-        Random().nextInt(64),
-        Random().nextInt(128),
-        Random().nextInt(256),
-        1,
-      );
-    });
-  }
-
-  void _changeColorBackground() {
-    if (_colorGroup == ColorMode.partyMode) {
-      _useRandomPartyColors();
-    } else if (_colorGroup == ColorMode.warmMode) {
-      _useRandomWarmColors();
-    } else {
-      _useRandomColdColors();
-    }
-  }
-
+  /// Show the settings dialog
   void _showSettingsDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (context, setState) {
-            bool soundSwitch = false;
-            bool darkModeSwitch = false;
-
             return AlertDialog(
               title: const Text(
                 "Settings",
@@ -174,32 +160,65 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _changeColorBackground,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Test task"),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                _showSettingsDialog();
-              },
-            ),
-          ],
-        ),
-        backgroundColor: _backgroundColor,
-        body: const Center(
-          child: Text(
-            "Hey there",
-            style: TextStyle(
-              fontSize: 30,
-              color: Colors.white,
-            ),
-          ),
-        ),
+  /// Generate random color for background
+  void _useRandomPartyColors() {
+    setState(() {
+      _backgroundColor = Color.fromRGBO(
+        Random().nextInt(256),
+        Random().nextInt(256),
+        Random().nextInt(256),
+        1,
+      );
+    });
+  }
+
+  /// Generate random warm colors for background
+  void _useRandomWarmColors() {
+    setState(() {
+      _backgroundColor = Color.fromRGBO(
+        Random().nextInt(256),
+        Random().nextInt(128),
+        Random().nextInt(64),
+        1,
+      );
+    });
+  }
+
+  /// Generate random cold colors for background
+  void _useRandomColdColors() {
+    setState(() {
+      _backgroundColor = Color.fromRGBO(
+        Random().nextInt(64),
+        Random().nextInt(128),
+        Random().nextInt(256),
+        1,
+      );
+    });
+  }
+
+  /// Change the background color taking into account the _colorGroup selected by the user.
+  void _changeColorBackground() {
+    if (_colorGroup == ColorMode.partyMode) {
+      _useRandomPartyColors();
+    } else if (_colorGroup == ColorMode.warmMode) {
+      _useRandomWarmColors();
+    } else {
+      _useRandomColdColors();
+    }
+  }
+
+  void _checkSoundMode() {
+    if (soundSwitch == true) {
+      player.setSource(AssetSource('note1.wav'));
+    }
+  }
+
+  Widget _buildTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
