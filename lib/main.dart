@@ -168,50 +168,26 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /// Generate random color for background
-  void _useRandomPartyColors() {
+  /// Generate random cold colors for background taking into account the parameters
+  void _useRandom(int red, int green, int blue) {
     setState(() {
       _backgroundColor = Color.fromRGBO(
-        Random().nextInt(256),
-        Random().nextInt(256),
-        Random().nextInt(256),
-        1,
-      );
-    });
-  }
-
-  /// Generate random warm colors for background
-  void _useRandomWarmColors() {
-    setState(() {
-      _backgroundColor = Color.fromRGBO(
-        Random().nextInt(256),
-        Random().nextInt(128),
-        Random().nextInt(64),
-        1,
-      );
-    });
-  }
-
-  /// Generate random cold colors for background
-  void _useRandomColdColors() {
-    setState(() {
-      _backgroundColor = Color.fromRGBO(
-        Random().nextInt(64),
-        Random().nextInt(128),
-        Random().nextInt(256),
+        Random().nextInt(red),
+        Random().nextInt(green),
+        Random().nextInt(blue),
         1,
       );
     });
   }
 
   /// Change the background color taking into account the _colorGroup selected by the user.
-  void _changeColorBackground() {
+  void _changeColorBackground2() {
     if (_colorGroup == ColorMode.partyMode) {
-      _useRandomPartyColors();
+      _useRandom(256, 256, 256);
     } else if (_colorGroup == ColorMode.warmMode) {
-      _useRandomWarmColors();
+      _useRandom(256, 128, 64);
     } else {
-      _useRandomColdColors();
+      _useRandom(64, 128, 256);
     }
   }
 
