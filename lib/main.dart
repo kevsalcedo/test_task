@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   ColorMode? _colorGroup = ColorMode.partyMode;
   Color _backgroundColor = Colors.red;
   final player = AudioPlayer();
-  bool soundSwitch = false;
+  bool isSoundActive = false;
   bool isDarkMode = false;
 
   @override
@@ -137,10 +137,10 @@ class _MyAppState extends State<MyApp> {
                       secondary: const Icon(
                         Icons.volume_up,
                       ),
-                      value: soundSwitch,
+                      value: isSoundActive,
                       onChanged: (bool value) {
                         setState(() {
-                          soundSwitch = value;
+                          isSoundActive = value;
                         });
                       },
                     ),
@@ -215,9 +215,9 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  /// Play sound if soundSwitch is true
+  /// Play sound if isSoundActive is true
   void _checkSoundMode() {
-    if (soundSwitch == true) {
+    if (isSoundActive == true) {
       player.setSource(AssetSource('note1.wav'));
       player.resume();
       player.seek(const Duration(milliseconds: 1200));
