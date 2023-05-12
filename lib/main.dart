@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:test_task/utils/display_constants.dart';
+import 'package:test_task/utils/styles.dart';
 
 void main() {
   runApp(
@@ -94,10 +95,7 @@ class _MyAppState extends State<MyApp> {
                   children: <Widget>[
                     const Text(
                       kSelectColors,
-                      style: TextStyle(
-                        fontSize: kHeadlineType2,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kTextStyle,
                     ),
                     RadioListTile<ColorMode>(
                       title: const Text(kPartyMode),
@@ -123,15 +121,12 @@ class _MyAppState extends State<MyApp> {
                         setState(() => _colorGroup = value!);
                       },
                     ),
-                    const SizedBox(height: 10),
+                    //const SizedBox(height: 10),
                     const Divider(height: 1),
                     const SizedBox(height: 10),
                     const Text(
                       kEnableOptions,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kTextStyle,
                     ),
                     SwitchListTile(
                       title: const Text(kSound),
