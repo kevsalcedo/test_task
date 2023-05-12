@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _changeColorBackground2();
+        _changeColorBackground();
         _checkSoundMode();
       },
       child: MaterialApp(
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
             child: Text(
               kHeyThere,
               style: TextStyle(
-                fontSize: 30,
+                fontSize: kFrontTextSize,
                 //color: Colors.white,
               ),
             ),
@@ -75,7 +75,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /// Show the settings dialog
+  /// Displays a dialog that allows user to select a color group for background colors and toggle
+  /// sound and dark mode
   void _showSettingsDialog() {
     showDialog(
       context: context,
@@ -164,8 +165,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  /// Generate random cold colors for background taking into account the parameters
-  void _useRandom(int red, int green, int blue) {
+  /// Generate random colors for background taking into account the parameters.
+  void _useRandomColors(int red, int green, int blue) {
     setState(() {
       _backgroundColor = Color.fromRGBO(
         Random().nextInt(red),
@@ -176,18 +177,18 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  /// Change the background color taking into account the _colorGroup selected by the user.
-  void _changeColorBackground2() {
+  /// Defines the parameters for the color range depending on the selected _colorGroup.
+  void _changeColorBackground() {
     if (_colorGroup == ColorMode.partyMode) {
-      _useRandom(256, 256, 256);
+      _useRandomColors(256, 256, 256);
     } else if (_colorGroup == ColorMode.warmMode) {
-      _useRandom(256, 128, 64);
+      _useRandomColors(256, 128, 64);
     } else {
-      _useRandom(64, 128, 256);
+      _useRandomColors(64, 128, 256);
     }
   }
 
-  /// Play sound if isSoundActive is true
+  /// Play sound if isSoundActive is true.
   void _checkSoundMode() {
     if (isSoundActive == true) {
       player.setSource(AssetSource(kNote1));
