@@ -12,3 +12,4 @@ const String kSound = 'Sound';
 const String kDarkMode = 'Dark mode';
 const String kNote1 = 'note1.wav';
 const int kSoundDuration = 1200;
+const double kLetterSpacing = 1.5;
