@@ -14,7 +14,7 @@ void main() {
   );
 }
 
-///
+/// The main application widget.
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -186,7 +186,8 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  /// Defines the parameters for the color range depending on the selected _colorGroup.
+  /// Defines the parameters for the color range depending on the selected
+  /// _colorGroup.
   void _changeColorBackground() {
     if (_colorGroup == ColorMode.partyMode) {
       _useRandomColors(
