@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:test_task/utils/display_constants.dart';
 
 void main() {
   runApp(
@@ -36,11 +37,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _changeColorBackground();
+        _changeColorBackground2();
         _checkSoundMode();
       },
       child: MaterialApp(
-        title: 'Test task',
+        title: kAppTitle,
         theme: ThemeData(
           brightness: isDarkMode ? Brightness.dark : Brightness.light,
           colorScheme:
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
         ),
         home: Scaffold(
           appBar: AppBar(
-            title: const Text("Test task"),
+            title: const Text(kAppTitle),
             actions: [
               IconButton(
                 icon: const Icon(Icons.settings),
@@ -61,7 +62,7 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: _backgroundColor,
           body: const Center(
             child: Text(
-              "Hey there",
+              kHeyThere,
               style: TextStyle(
                 fontSize: 30,
                 //color: Colors.white,
@@ -82,9 +83,9 @@ class _MyAppState extends State<MyApp> {
           builder: (context, setState) {
             return AlertDialog(
               title: const Text(
-                "Settings",
+                kSettings,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: kHeadlineType1,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -92,14 +93,14 @@ class _MyAppState extends State<MyApp> {
                 child: ListBody(
                   children: <Widget>[
                     const Text(
-                      'Select colors',
+                      kSelectColors,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: kHeadlineType2,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     RadioListTile<ColorMode>(
-                      title: const Text('Party mode'),
+                      title: const Text(kPartyMode),
                       value: ColorMode.partyMode,
                       groupValue: _colorGroup,
                       onChanged: (ColorMode? value) {
@@ -107,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                       },
                     ),
                     RadioListTile<ColorMode>(
-                      title: const Text('Warm mode'),
+                      title: const Text(kWormMode),
                       value: ColorMode.warmMode,
                       groupValue: _colorGroup,
                       onChanged: (ColorMode? value) {
@@ -115,7 +116,7 @@ class _MyAppState extends State<MyApp> {
                       },
                     ),
                     RadioListTile<ColorMode>(
-                      title: const Text('Cold mode'),
+                      title: const Text(kColdMode),
                       value: ColorMode.coldMode,
                       groupValue: _colorGroup,
                       onChanged: (ColorMode? value) {
@@ -126,14 +127,14 @@ class _MyAppState extends State<MyApp> {
                     const Divider(height: 1),
                     const SizedBox(height: 10),
                     const Text(
-                      'Enable options',
+                      kEnableOptions,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SwitchListTile(
-                      title: const Text('Sound'),
+                      title: const Text(kSound),
                       secondary: const Icon(
                         Icons.volume_up,
                       ),
@@ -146,7 +147,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                     SwitchListTile(
                       title: const Text(
-                        'Dark mode',
+                        kDarkMode,
                       ),
                       secondary: const Icon(
                         Icons.dark_mode,
@@ -194,9 +195,9 @@ class _MyAppState extends State<MyApp> {
   /// Play sound if isSoundActive is true
   void _checkSoundMode() {
     if (isSoundActive == true) {
-      player.setSource(AssetSource('note1.wav'));
+      player.setSource(AssetSource(kNote1));
       player.resume();
-      player.seek(const Duration(milliseconds: 1200));
+      player.seek(const Duration(milliseconds: kSoundDuration));
     }
   }
 }
